@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.danmercede.com/works/agent-demo-video/" />
+  <title>agent-demo-video — Automated, narrated, captioned demo videos</title>
+  <meta name="description"
+    content="agent-demo-video is an MIT-licensed, headless pipeline that turns a DEMO_SCRIPT manifest and a running web app into a narrated, captioned MP4 — audio-first, so audio, video, and captions stay in sync with zero drift. Keyless dry-run via FAKE_TTS." />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="agent-demo-video" />
+  <meta property="og:title" content="agent-demo-video — Automated, narrated, captioned demo videos" />
+  <meta property="og:description"
+    content="A headless pipeline that turns a DEMO_SCRIPT manifest and a running web app into a narrated, captioned MP4 — audio-first, zero-drift, keyless dry-run." />
+  <meta property="og:url" content="https://www.danmercede.com/works/agent-demo-video/" />
+  <meta property="og:image" content="https://www.danmercede.com/works/agent-demo-video/og-card.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="agent-demo-video — automated, narrated, captioned demo videos" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@danmercede" />
+  <meta name="twitter:creator" content="@danmercede" />
+  <meta name="twitter:title" content="agent-demo-video — Automated, narrated, captioned demo videos" />
+  <meta name="twitter:description"
+    content="A headless pipeline that turns a DEMO_SCRIPT manifest and a running web app into a narrated, captioned MP4 — audio-first, zero-drift, keyless dry-run." />
+  <meta name="twitter:image" content="https://www.danmercede.com/works/agent-demo-video/og-card.png" />
+  <meta name="twitter:image:alt" content="agent-demo-video — automated, narrated, captioned demo videos" />
+
+  <!-- Brand favicons (Dan Mercede logo pack — DM mark) -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Structured data: SoftwareSourceCode + SoftwareApplication for the tool,
+       backlinking author/publisher to the hub Person (danmercede.com/#person).
+       Static so crawlers see it without executing JS. -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareSourceCode",
+          "@id": "https://www.danmercede.com/works/agent-demo-video/#software",
+          "name": "agent-demo-video",
+          "description": "Headless, audio-first pipeline that turns a DEMO_SCRIPT manifest and a running web app into a narrated, captioned MP4, with audio, video, and captions in sync by construction.",
+          "url": "https://www.danmercede.com/works/agent-demo-video/",
+          "codeRepository": "https://github.com/OrionArchitekton/agent-demo-video",
+          "programmingLanguage": "TypeScript",
+          "runtimePlatform": "Node.js 18+",
+          "license": "https://opensource.org/licenses/MIT",
+          "author": { "@id": "https://www.danmercede.com/#person" },
+          "maintainer": { "@id": "https://www.danmercede.com/#person" }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://www.danmercede.com/works/agent-demo-video/#application",
+          "name": "agent-demo-video",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Linux, macOS, Windows (Node.js 18+)",
+          "description": "A headless command-line pipeline that turns a Markdown DEMO_SCRIPT and a running web app into a narrated, captioned MP4 — audio-first, so audio, video, and captions stay in sync with zero drift. Keyless dry-run via FAKE_TTS.",
+          "url": "https://www.danmercede.com/works/agent-demo-video/",
+          "softwareVersion": "0.1.0",
+          "isAccessibleForFree": true,
+          "license": "https://opensource.org/licenses/MIT",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@id": "https://www.danmercede.com/#person" },
+          "publisher": { "@id": "https://www.danmercede.com/#person" }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://www.danmercede.com/#person",
+          "name": "Dan Mercede",
+          "url": "https://www.danmercede.com"
+        }
+      ]
+    }
+  </script>
+
+  <!-- Fonts: Inter for UI, JetBrains Mono for code/terminal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind is bundled at build time (compiled stylesheet emitted by Vite);
+       no render-blocking CDN JIT compiler. Base/print styles live in index.css. -->
+</head>
+
+<body class="bg-white text-neutral-900 antialiased">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
+</html>
