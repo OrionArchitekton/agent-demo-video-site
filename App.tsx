@@ -64,6 +64,7 @@ const App: React.FC = () => {
     credibility,
     problem,
     whatItDoes,
+    video,
     cta,
     quickstart,
     commands,
@@ -116,6 +117,23 @@ const App: React.FC = () => {
             </a>
           </div>
         </header>
+
+        {video && (
+          <section aria-label={video.title}>
+            <div className="relative w-full overflow-hidden rounded-lg border border-neutral-200 bg-neutral-900" style={{ aspectRatio: '16 / 9' }}>
+              <iframe
+                className="absolute inset-0 h-full w-full"
+                src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}`}
+                title={video.title}
+                loading="lazy"
+                allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                allowFullScreen
+                referrerPolicy="strict-origin-when-cross-origin"
+              />
+            </div>
+            <p className="text-sm text-neutral-500 mt-3">{video.caption}</p>
+          </section>
+        )}
 
         {/* 2. The problem */}
         <section>

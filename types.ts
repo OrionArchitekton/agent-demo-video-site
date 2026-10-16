@@ -35,6 +35,12 @@ export interface ProductData {
     heading: string;
     body: string;
   };
+  /** Optional embedded YouTube video shown under the hero. */
+  video?: {
+    youtubeId: string;
+    title: string;
+    caption: string;
+  };
   cta: {
     primaryLabel: string;
     primaryUrl: string;
