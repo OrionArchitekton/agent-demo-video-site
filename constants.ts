@@ -79,7 +79,7 @@ export const PRODUCT_DATA: ProductData = {
         title: 'Script and config',
         note: 'start from the sample config, then point it at your DEMO_SCRIPT.md and running app',
         command:
-          'curl -fsSLo demo.config.json https://raw.githubusercontent.com/OrionArchitekton/agent-demo-video/master/demo.config.sample.json',
+          `curl -fsSLo demo.config.json https://raw.githubusercontent.com/OrionArchitekton/agent-demo-video/v${VERSION}/demo.config.sample.json`,
       },
       {
         title: 'Keyless dry run (silent audio, no API key)',

@@ -1,6 +1,7 @@
 import type { Plugin } from 'vite';
 import { PRODUCT_DATA } from './constants';
 import type { ProductData } from './types';
+import { isYouTubeId, youtubeWatchUrl } from './video';
 
 /**
  * Build-time body-bake (mirrors danmercede-info template).
@@ -78,9 +79,9 @@ export function renderBakedBody(data: ProductData): string {
 
   // The self-demo as a plain link plus caption: crawlers cannot play an embed.
   const videoSection =
-    video && /^[A-Za-z0-9_-]{11}$/.test(video.youtubeId)
+    video && isYouTubeId(video.youtubeId)
       ? `<section><h2>${escapeHtml(video.title)}</h2>` +
-        `<p><a href="https://youtu.be/${escapeHtml(video.youtubeId)}" rel="noopener noreferrer">Watch it on YouTube</a></p>` +
+        `<p><a href="${escapeHtml(youtubeWatchUrl(video.youtubeId))}" rel="noopener noreferrer">Watch it on YouTube</a></p>` +
         `<p>${escapeHtml(video.caption)}</p></section>`
       : '';
 
