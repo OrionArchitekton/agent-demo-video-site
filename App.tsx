@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { PRODUCT_DATA } from './constants';
 import type { DemoLine } from './types';
+import { isYouTubeId, youtubeEmbedUrl } from './video';
+
 
 const SectionTitle: React.FC<{ index: string; title: string }> = ({ index, title }) => (
   <h2 className="text-xs uppercase tracking-widest text-neutral-500 font-mono mb-4 mt-12 border-b border-neutral-200 pb-2">
@@ -64,6 +66,7 @@ const App: React.FC = () => {
     credibility,
     problem,
     whatItDoes,
+    video,
     cta,
     quickstart,
     commands,
@@ -116,6 +119,23 @@ const App: React.FC = () => {
             </a>
           </div>
         </header>
+
+        {video && isYouTubeId(video.youtubeId) && (
+          <section aria-label={video.title}>
+            <div className="relative w-full overflow-hidden rounded-lg border border-neutral-200 bg-neutral-900" style={{ aspectRatio: '16 / 9' }}>
+              <iframe
+                className="absolute inset-0 h-full w-full"
+                src={youtubeEmbedUrl(video.youtubeId)}
+                title={video.title}
+                loading="lazy"
+                allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                allowFullScreen
+                referrerPolicy="strict-origin-when-cross-origin"
+              />
+            </div>
+            <p className="text-sm text-neutral-500 mt-3">{video.caption}</p>
+          </section>
+        )}
 
         {/* 2. The problem */}
         <section>

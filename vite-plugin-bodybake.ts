@@ -1,6 +1,7 @@
 import type { Plugin } from 'vite';
-import { PRODUCT_DATA } from './constants';
+import { PRODUCT_DATA, VERSION } from './constants';
 import type { ProductData } from './types';
+import { isYouTubeId, youtubeWatchUrl } from './video';
 
 /**
  * Build-time body-bake (mirrors danmercede-info template).
@@ -37,6 +38,7 @@ export function renderBakedBody(data: ProductData): string {
     credibility,
     problem,
     whatItDoes,
+    video,
     quickstart,
     commands,
     differentiators,
@@ -66,9 +68,22 @@ export function renderBakedBody(data: ProductData): string {
     )
     .join('');
 
-  // First quickstart block is the install command — the most load-bearing line
-  // for an answer engine summarizing "how do I install this".
-  const installBlock = quickstart.blocks[0];
+  // Every quickstart block, so raw-HTML readers get both the plugin and the npx paths.
+  const quickstartBlocks = quickstart.blocks
+    .map(
+      (block) =>
+        `<p>${escapeHtml(block.title)}${block.note ? ` (${escapeHtml(block.note)})` : ''}:</p>` +
+        `<pre><code>${escapeHtml(block.command)}</code></pre>`,
+    )
+    .join('');
+
+  // The self-demo as a plain link plus caption: crawlers cannot play an embed.
+  const videoSection =
+    video && isYouTubeId(video.youtubeId)
+      ? `<section><h2>${escapeHtml(video.title)}</h2>` +
+        `<p><a href="${escapeHtml(youtubeWatchUrl(video.youtubeId))}" rel="noopener noreferrer">Watch it on YouTube</a></p>` +
+        `<p>${escapeHtml(video.caption)}</p></section>`
+      : '';
 
   // Self-contained, answer-first product passage for raw-HTML crawlers, wrapped
   // in the same <main id="main-content"> landmark + skip link the live app
@@ -81,6 +96,7 @@ export function renderBakedBody(data: ProductData): string {
     `<p>${escapeHtml(tagline)}</p>`,
     `<p>${escapeHtml(credibility)}</p>`,
     `</header>`,
+    videoSection,
     `<section>`,
     `<h2>${escapeHtml(problem.heading)}</h2>`,
     `<p>${escapeHtml(problem.body)}</p>`,
@@ -89,8 +105,7 @@ export function renderBakedBody(data: ProductData): string {
     `<section>`,
     `<h2>${escapeHtml(quickstart.heading)}</h2>`,
     `<p>${escapeHtml(quickstart.intro)}</p>`,
-    `<p>${escapeHtml(installBlock.title)}${installBlock.note ? ` (${escapeHtml(installBlock.note)})` : ''}:</p>`,
-    `<pre><code>${escapeHtml(installBlock.command)}</code></pre>`,
+    quickstartBlocks,
     `</section>`,
     `<section>`,
     `<h2>Command surface</h2>`,
@@ -116,6 +131,11 @@ export function bodyBake(): Plugin {
     transformIndexHtml: {
       order: 'post',
       handler(html: string) {
+        // The JSON-LD softwareVersion is static HTML; fail the build if it drifts from the version
+        // every quickstart command is pinned to.
+        if (!html.includes(`"softwareVersion": "${VERSION}"`)) {
+          throw new Error(`body-bake: index.html softwareVersion does not match VERSION ${VERSION} in constants.ts`);
+        }
         const baked = renderBakedBody(PRODUCT_DATA);
         // Fail loud if the rendered body is empty/headingless — prefer a hard
         // build failure over silently shipping a blank crawler body.
