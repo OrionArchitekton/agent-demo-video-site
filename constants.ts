@@ -2,7 +2,7 @@ import { ProductData } from './types';
 
 const GITHUB = 'https://github.com/OrionArchitekton/agent-demo-video';
 const NPM = 'https://www.npmjs.com/package/agent-demo-video';
-const VERSION = '0.3.0';
+export const VERSION = '0.3.0';
 // The self-demo: a video the tool rendered of itself (a sample app, then its own script, run and
 // checks), on @danmercede. Primary proof on the page.
 const SELF_DEMO_ID = '9Oi9SKoahvs';
@@ -18,8 +18,8 @@ const SAMPLE_VIDEO = 'https://youtu.be/GaTzq_fDmqU';
  * vocabulary, the pipeline stages in pipeline.ts, and the published CLI). The tool ships on npm as
  * `agent-demo-video` with a `demo-video` CLI (and a `demo-video login` subcommand for
  * authenticated SaaS capture), and the repo is also a Claude Code plugin marketplace. No
- * fabricated commands or numbers: the two render lengths in the demo are the self-demo's real
- * silent and narrated renders.
+ * fabricated commands or numbers: the one render length in the demo is the narrated self-demo's,
+ * as recorded in demos/self/assets/run.log at v0.3.0.
  */
 export const PRODUCT_DATA: ProductData = {
   name: 'agent-demo-video',
@@ -77,7 +77,7 @@ export const PRODUCT_DATA: ProductData = {
       },
       {
         title: 'Script and config',
-        note: 'start from the sample config, then point it at your DEMO_SCRIPT.md and running app',
+        note: 'start from the sample config, then point it at your DEMO_SCRIPT.md and running app (in Windows PowerShell, type curl.exe)',
         command:
           `curl -fsSLo demo.config.json https://raw.githubusercontent.com/OrionArchitekton/agent-demo-video/v${VERSION}/demo.config.sample.json`,
       },
@@ -153,7 +153,7 @@ export const PRODUCT_DATA: ProductData = {
   demo: {
     heading: 'Demo',
     intro:
-      'Author a DEMO_SCRIPT.md, prove it keyless, then add a voice. The pipeline checks every selector against the app before any narration is generated, then synthesises narration, records the browser, builds word-timed captions, muxes, and verifies the delivered video file, failing if anything is out of spec.',
+      'Author a DEMO_SCRIPT.md, prove it keyless, then add a voice. Before any narration is generated, the pipeline checks the selectors it can against the app and reports the ones it cannot prove; then it synthesises narration, records the browser, builds word-timed captions, muxes, and verifies the delivered video file, failing if anything is out of spec.',
     lines: [
       { kind: 'comment', text: '# 1. Author a DEMO_SCRIPT.md: shots + browser actions + narration' },
       { kind: 'comment', text: '# 2. Keyless dry run, no API key (silent audio, real capture + captions)' },
@@ -163,11 +163,10 @@ export const PRODUCT_DATA: ProductData = {
         text: 'preflight → tts(fake) → capture → captions → mux → verify',
         tone: 'muted',
       },
-      { kind: 'output', text: '✓ wrote out/final.mp4 (73.8s, 9 segments)', tone: 'ok' },
       { kind: 'output', text: '' },
       { kind: 'comment', text: '# 3. Add a voice (ElevenLabs or your own text-to-speech), render for real' },
       { kind: 'command', text: `npx -y agent-demo-video@${VERSION} demo.config.json` },
-      { kind: 'output', text: '✓ wrote out/final.mp4 (58.4s, 9 segments)', tone: 'ok' },
+      { kind: 'output', text: '✓ wrote out/final.mp4 (60.3s, 9 segments)', tone: 'ok' },
     ],
   },
 

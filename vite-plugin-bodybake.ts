@@ -1,5 +1,5 @@
 import type { Plugin } from 'vite';
-import { PRODUCT_DATA } from './constants';
+import { PRODUCT_DATA, VERSION } from './constants';
 import type { ProductData } from './types';
 import { isYouTubeId, youtubeWatchUrl } from './video';
 
@@ -131,6 +131,11 @@ export function bodyBake(): Plugin {
     transformIndexHtml: {
       order: 'post',
       handler(html: string) {
+        // The JSON-LD softwareVersion is static HTML; fail the build if it drifts from the version
+        // every quickstart command is pinned to.
+        if (!html.includes(`"softwareVersion": "${VERSION}"`)) {
+          throw new Error(`body-bake: index.html softwareVersion does not match VERSION ${VERSION} in constants.ts`);
+        }
         const baked = renderBakedBody(PRODUCT_DATA);
         // Fail loud if the rendered body is empty/headingless — prefer a hard
         // build failure over silently shipping a blank crawler body.
