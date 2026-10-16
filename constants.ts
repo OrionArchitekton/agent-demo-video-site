@@ -76,24 +76,31 @@ export const PRODUCT_DATA: ProductData = {
         command: `npx -y -p agent-demo-video@${VERSION} playwright install chromium`,
       },
       {
+        title: 'Script and config',
+        note: 'start from the sample config, then point it at your DEMO_SCRIPT.md and running app',
+        command:
+          'curl -fsSLo demo.config.json https://raw.githubusercontent.com/OrionArchitekton/agent-demo-video/master/demo.config.sample.json',
+      },
+      {
         title: 'Keyless dry run (silent audio, no API key)',
         note: 'real capture + real captions',
         command: `FAKE_TTS=1 npx -y agent-demo-video@${VERSION} demo.config.json`,
       },
       {
-        title: 'Your own voice',
-        note: 'any text-to-speech you can run from a shell',
+        title: 'Your own voice (a block in demo.config.json)',
+        note: 'any text-to-speech you can run from a shell; the aligner gives word-timed captions',
         command: [
           '"voice": {',
           '  "provider": "command",',
-          '  "command": ["my-tts", "--text-file", "{text}", "--out", "{out}"]',
+          '  "command": ["my-tts", "--text-file", "{text}", "--out", "{out}"],',
+          '  "aligner": ["/path/to/venv/bin/python", "/path/to/agent-demo-video/tools/align_whisper.py", "{audio}", "{text}", "{out}"]',
           '}',
         ].join('\n'),
       },
       {
         title: 'Or ElevenLabs',
-        note: 'your own API key',
-        command: `ELEVENLABS_API_KEY=<your key> npx -y agent-demo-video@${VERSION} demo.config.json`,
+        note: 'replace your-api-key with your own key',
+        command: `ELEVENLABS_API_KEY=your-api-key npx -y agent-demo-video@${VERSION} demo.config.json`,
       },
       {
         title: 'Authenticated SaaS (optional)',
@@ -180,7 +187,7 @@ export const PRODUCT_DATA: ProductData = {
       {
         title: 'Your voice, or none',
         body:
-          'Narrate with ElevenLabs, or with any text-to-speech you run yourself, with word timings from an aligner. FAKE_TTS renders silent drafts with real capture and real captions, so you can iterate on the script for free.',
+          'Narrate with ElevenLabs, or with any text-to-speech you run yourself, with word timings from your program or an aligner. FAKE_TTS renders silent drafts with real capture and real captions, so you can iterate on the script for free.',
       },
       {
         title: 'Built for Claude Code',

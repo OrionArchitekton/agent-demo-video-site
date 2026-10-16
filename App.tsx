@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { PRODUCT_DATA } from './constants';
 import type { DemoLine } from './types';
 
+// A YouTube video id is exactly 11 characters from this set; anything else is not embedded.
+const YOUTUBE_ID = /^[A-Za-z0-9_-]{11}$/;
+
 const SectionTitle: React.FC<{ index: string; title: string }> = ({ index, title }) => (
   <h2 className="text-xs uppercase tracking-widest text-neutral-500 font-mono mb-4 mt-12 border-b border-neutral-200 pb-2">
     <span aria-hidden="true" className="text-copper-dark">{index} // </span>
@@ -118,12 +121,12 @@ const App: React.FC = () => {
           </div>
         </header>
 
-        {video && (
+        {video && YOUTUBE_ID.test(video.youtubeId) && (
           <section aria-label={video.title}>
             <div className="relative w-full overflow-hidden rounded-lg border border-neutral-200 bg-neutral-900" style={{ aspectRatio: '16 / 9' }}>
               <iframe
                 className="absolute inset-0 h-full w-full"
-                src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}`}
+                src={`https://www.youtube-nocookie.com/embed/${encodeURIComponent(video.youtubeId)}`}
                 title={video.title}
                 loading="lazy"
                 allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"

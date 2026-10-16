@@ -35,7 +35,7 @@ export interface ProductData {
     heading: string;
     body: string;
   };
-  /** Optional embedded YouTube video shown under the hero. */
+  /** Optional embedded YouTube video shown under the hero (youtubeId must be an 11-character id). */
   video?: {
     youtubeId: string;
     title: string;
