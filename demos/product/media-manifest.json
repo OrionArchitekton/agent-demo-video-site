@@ -1,0 +1,14 @@
+{
+  "slug": "agent-demo-video",
+  "demonstrated_version": "v0.3.0",
+  "source_name": "agent-demo-video-self-demo.mp4",
+  "source_sha256": "b057e671679bf696bb04803d42f9e0bb1978d77831ce3058ac41fefb04627e3a",
+  "ranges_seconds": null,
+  "duration_seconds": 58.433333,
+  "voice": "Previously published synthetic Dan narration",
+  "files": {
+    "agent-demo-video-demo.mp4": "b057e671679bf696bb04803d42f9e0bb1978d77831ce3058ac41fefb04627e3a",
+    "agent-demo-video-demo.jpg": "8bfd808f7565953da54d664eb8daecbed9142481bf1703e15dbcf4c0b7406641",
+    "agent-demo-video-demo.vtt": "921457040276fb9a9c33f6d5a5a57d476a89ced42be06ae6720d16cbc721d671"
+  }
+}

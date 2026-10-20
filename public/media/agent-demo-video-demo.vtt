@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:02.200 --> 00:00:07.700
+This is a release checklist for a small web app. Watch it get filled in, one step at a time.
+
+00:00:08.000 --> 00:00:15.520
+First we name the release, then tick off the tests and the docs. The camera follows each click, and the captions keep pace with the voice.
+
+00:00:16.000 --> 00:00:19.680
+The last box fills the progress bar, and one click ships it.
+
+00:00:21.400 --> 00:00:27.920
+None of that was recorded by hand. It came from this script: each shot is a heading, one line of narration, and the clicks to perform.
+
+00:00:28.267 --> 00:00:35.827
+One command turned the script into the video. The voice comes first, and its timing sets the pace for the recording and the captions.
+
+00:00:36.233 --> 00:00:46.133
+Then the tool checks its own work. It listens back to the narration, confirms the first frame carries the hook, verifies the video file, and lays out a contact sheet of every shot.
+
+00:00:46.433 --> 00:00:53.213
+To make one for your own app, add it to Claude Code as a plugin, or run it from a terminal. The video you just watched made itself.
