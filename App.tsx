@@ -1,7 +1,7 @@
+import { ProductDemo } from './ProductDemo';
 import React, { useState } from 'react';
 import { PRODUCT_DATA } from './constants';
 import type { DemoLine } from './types';
-import { isYouTubeId, youtubeEmbedUrl } from './video';
 
 
 const SectionTitle: React.FC<{ index: string; title: string }> = ({ index, title }) => (
@@ -120,22 +120,7 @@ const App: React.FC = () => {
           </div>
         </header>
 
-        {video && isYouTubeId(video.youtubeId) && (
-          <section aria-label={video.title}>
-            <div className="relative w-full overflow-hidden rounded-lg border border-neutral-200 bg-neutral-900" style={{ aspectRatio: '16 / 9' }}>
-              <iframe
-                className="absolute inset-0 h-full w-full"
-                src={youtubeEmbedUrl(video.youtubeId)}
-                title={video.title}
-                loading="lazy"
-                allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-                allowFullScreen
-                referrerPolicy="strict-origin-when-cross-origin"
-              />
-            </div>
-            <p className="text-sm text-neutral-500 mt-3">{video.caption}</p>
-          </section>
-        )}
+        <ProductDemo />
 
         {/* 2. The problem */}
         <section>
