@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && npm run test:demo",
+    "build": "vite build && npm run test:built",
     "preview": "vite preview",
-    "test:demo": "node --test tests/product-demo.test.mjs"
+    "test:demo": "npm run build",
+    "test:built": "node --test tests/*.test.mjs",
+    "test": "npm run build"
   },
   "dependencies": {
     "react": "^19.2.3",
